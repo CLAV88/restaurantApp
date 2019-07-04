@@ -33,22 +33,28 @@ Type **python lotsofmenus.py** to populate the database with restaurants and men
 
 Schema:
 
-           List of relations
- Schema |    Name    | Type  |  Owner
---------+------------+-------+---------
- public | menu_item  | table | catalog
- public | restaurant | table | catalog
- public | user       | table | catalog
-(3 rows)
+|                                         | 
+|-----------------------------------------| 
+| List of relations                       | 
+|  Schema |    Name    | Type  |  Owner   | 
+| --------+------------+-------+--------- | 
+|  public | menu_item  | table | catalog  | 
+|  public | restaurant | table | catalog  | 
+|  public | user       | table | catalog  | 
+| (3 rows)                                | 
+
 
 catalog-# \ds
-                List of relations
- Schema |       Name        |   Type   |  Owner
---------+-------------------+----------+---------
- public | menu_item_id_seq  | sequence | catalog
- public | restaurant_id_seq | sequence | catalog
- public | user_id_seq       | sequence | catalog
-(3 rows)
+
+|                                                   | 
+|---------------------------------------------------| 
+| List of relations                                 | 
+|  Schema |       Name        |   Type   |  Owner   | 
+| --------+-------------------+----------+--------- | 
+|  public | menu_item_id_seq  | sequence | catalog  | 
+|  public | restaurant_id_seq | sequence | catalog  | 
+|  public | user_id_seq       | sequence | catalog  | 
+| (3 rows)                                          | 
 
 
 ## Linux conf setup on WSGI
@@ -126,6 +132,18 @@ On Windows, Git will provide you with a Unix-style terminal and shell (Git Bash)
 (On Mac or Linux systems you can use the regular terminal program.)
 
 You will need Git to install the configuration for the VM. If you'd like to learn more about Git, [take a look at our course about Git and Github](http://www.udacity.com/course/ud775).
+
+
+## Additional References
+
+References:
+
+[UFW docs](https://help.ubuntu.com/community/UFW)
+[How to setup PostgresQL](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+[Virtual Environments](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html)
+[Flask uswgi and nginx](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)
+[Flask app - deploy a flask app](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+[PSQL to Markdown Converter](https://donatstudios.com/CsvToMarkdownTable)
 
 
 ## Ubuntu Packages Installed:
@@ -733,13 +751,3 @@ You will need Git to install the configuration for the VM. If you'd like to lear
 * xz-utils/bionic,now 5.2.2-1.3 amd64 [installed]
 * zerofree/bionic,now 1.0.4-1 amd64 [installed]
 * zlib1g/bionic,now 1:1.2.11.dfsg-0ubuntu2 amd64 [installed]
-
-## Additional References
-
-References:
-
-[UFW docs](https://help.ubuntu.com/community/UFW)
-[How to setup PostgresQL](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
-[Virtual Environments](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html)
-[Flask uswgi and nginx](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)
-[Flask app - deploy a flask app](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
