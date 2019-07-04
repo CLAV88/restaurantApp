@@ -23,7 +23,7 @@ Now type **python database_setup.py** to initialize the database.
 Type **python lotsofmenus.py** to populate the database with restaurants and menu items. (Optional)
 
 
-[Here's the real website, Check it out!](http://35.183.175.71.xip.io)
+[Here's the real website, Check it out!](http://99.254.130.8.xip.io)
 
 ## Instructions for upping venv for python 2.7 within server to make any needed changes to the packages that the python instance on the VM uses to run the app.
 
