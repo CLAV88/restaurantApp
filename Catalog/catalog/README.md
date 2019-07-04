@@ -10,9 +10,9 @@ This is a full CRUD capable application, to demonstrate understanding of how usi
 
 The application has multiple easy to use API endpoints to expose the data in the PSQL database underlying the site, and allows any user with a Google account to create custom lists of restaurants (along with menus, prices, food characteristics) all on their own.
 
-## Running the Restaurant Menu App
-Once it is up and running, type **ssh grader@35.183.175.71 -i /c/Users/calvi/.ssh/LightSailNew.pem**. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt.  To turn the virtual machine off (without deleting anything), type **vagrant halt**. If you do this, you'll need to run **vagrant up** again before you can log into it.
+## Logging into the Restaurant Menu App Server Ubuntu 18.04 on AWS LightSail.
 
+Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
 
 Now that you have Vagrant up and running type **vagrant ssh** to log into your VM.  change to the /vagrant directory by typing **cd /vagrant**. This will take you to the shared folder between your virtual machine and host machine.
 
@@ -22,14 +22,78 @@ Now type **python database_setup.py** to initialize the database.
 
 Type **python lotsofmenus.py** to populate the database with restaurants and menu items. (Optional)
 
+[Here's the real website, Check it out!](http://99.254.130.8.xip.io)
 
-[Here's the real website, Check it out!](http://35.183.175.71.xip.io)
 
 ## Instructions for upping venv for python 2.7 within server to make any needed changes to the packages that the python instance on the VM uses to run the app.
 
 > source venv/bin/activate
 
-## Dependencies
+## Database is PostGres SQL
+
+Schema:
+
+|                                         | 
+|-----------------------------------------| 
+| List of relations                       | 
+|  Schema |    Name    | Type  |  Owner   | 
+| --------+------------+-------+--------- | 
+|  public | menu_item  | table | catalog  | 
+|  public | restaurant | table | catalog  | 
+|  public | user       | table | catalog  | 
+| (3 rows)                                | 
+
+
+catalog-# \ds
+
+|                                                   | 
+|---------------------------------------------------| 
+| List of relations                                 | 
+|  Schema |       Name        |   Type   |  Owner   | 
+| --------+-------------------+----------+--------- | 
+|  public | menu_item_id_seq  | sequence | catalog  | 
+|  public | restaurant_id_seq | sequence | catalog  | 
+|  public | user_id_seq       | sequence | catalog  | 
+| (3 rows)                                          | 
+
+
+## Linux conf setup on WSGI
+
+> sudo apt-get update
+> sudo apt-get install apache2 apache2-utils ssl-cert
+
+### Now, install mod_wsgi Apache module by running the following command:
+
+> sudo apt-get install libapache2-mod-wsgi
+
+### Restart Apache service to get mod_wsgi to work.
+
+sudo systemctl restart apache2
+
+### Copy of conf file:
+
+<VirtualHost *:80>
+    ServerName 35.183.175.71
+    ServerAdmin admin@35.183.175.71
+    WSGIDaemonProcess Catalog python-path=/var/www/Catalog:/var/www/Catalog/catalog/venv/local/lib/python2.7/site-packages
+    WSGIProcessGroup Catalog
+    WSGIScriptAlias / /var/www/Catalog/catalog.wsgi
+    <Directory /var/www/Catalog/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/Catalog/catalog/static
+    <Directory /var/www/Catalog/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+
+## Python Dependencies
 
 ### (Python 2.7 libs) in the VM now
 
@@ -68,6 +132,18 @@ On Windows, Git will provide you with a Unix-style terminal and shell (Git Bash)
 (On Mac or Linux systems you can use the regular terminal program.)
 
 You will need Git to install the configuration for the VM. If you'd like to learn more about Git, [take a look at our course about Git and Github](http://www.udacity.com/course/ud775).
+
+
+## Additional References
+
+References:
+
+[UFW docs](https://help.ubuntu.com/community/UFW)
+[How to setup PostgresQL](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+[Virtual Environments](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html)
+[Flask uswgi and nginx](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)
+[Flask app - deploy a flask app](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+[PSQL to Markdown Converter](https://donatstudios.com/CsvToMarkdownTable)
 
 
 ## Ubuntu Packages Installed:
@@ -675,13 +751,3 @@ You will need Git to install the configuration for the VM. If you'd like to lear
 * xz-utils/bionic,now 5.2.2-1.3 amd64 [installed]
 * zerofree/bionic,now 1.0.4-1 amd64 [installed]
 * zlib1g/bionic,now 1:1.2.11.dfsg-0ubuntu2 amd64 [installed]
-
-## Additional References
-
-References:
-
-[UFW docs](https://help.ubuntu.com/community/UFW)
-[How to setup PostgresQL](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
-[Virtual Environments](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html)
-[Flask uswgi and nginx](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)
-[Flask app - deploy a flask app](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
