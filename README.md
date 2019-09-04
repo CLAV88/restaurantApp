@@ -12,7 +12,7 @@ The application has multiple easy to use API endpoints to expose the data in the
 
 ## Logging into the Restaurant Menu App Server Ubuntu 18.04 on AWS LightSail.
 
-Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
+Type **ssh USER@PORT -i /c/Users/calvi/.ssh/LightSailKey -p=PORTNUM**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
 
 Now that you have Vagrant up and running type **vagrant ssh** to log into your VM.  change to the /vagrant directory by typing **cd /vagrant**. This will take you to the shared folder between your virtual machine and host machine.
 
