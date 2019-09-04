@@ -55,8 +55,7 @@ def gconnect():
     # print(code)
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(
-            '/var/www/Catalog/catalog/client_secrets.json', scope='')
+	oauth_flow = flow_from_clientsecrets('/var/www/Catalog/catalog/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -136,7 +135,6 @@ def gconnect():
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
-
 # User Helper Functions
 
 
@@ -191,13 +189,13 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return redirect('/')
     else:
-        # If for whatever reason, the given token was invalid.
+        # For whatever reason, the given token was invalid.
         response = make_response(
             json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
 
-# API response for specific restaurant's menu FULL
+
 @app.route('/restaurant/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
@@ -205,13 +203,13 @@ def restaurantMenuJSON(restaurant_id):
         restaurant_id=restaurant_id).all()
     return jsonify(MenuItems=[i.serialize for i in items])
 
-# API response for specific restaurant and specific menu item
+
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/JSON')
 def menuItemJSON(restaurant_id, menu_id):
     Menu_Item = session.query(MenuItem).filter_by(id=menu_id).one()
     return jsonify(Menu_Item=Menu_Item.serialize)
 
-# API response for all restaurants page
+
 @app.route('/restaurant/JSON')
 def restaurantsJSON():
     restaurants = session.query(Restaurant).all()
@@ -224,8 +222,9 @@ def restaurantsJSON():
 def showRestaurants():
     restaurants = session.query(Restaurant).order_by(asc(Restaurant.name))
     return render_template('restaurants.html', restaurants=restaurants)
-
 # Create a new restaurant
+
+
 @app.route('/restaurant/new/', methods=['GET', 'POST'])
 def newRestaurant():
     if 'username' not in login_session:
@@ -240,9 +239,9 @@ def newRestaurant():
         return redirect(url_for('showRestaurants'))
     else:
         return render_template('newRestaurant.html')
-
-
 # Edit a restaurant
+
+
 @app.route('/restaurant/<int:restaurant_id>/edit/', methods=['GET', 'POST'])
 def editRestaurant(restaurant_id):
     if 'username' not in login_session:
@@ -256,9 +255,9 @@ def editRestaurant(restaurant_id):
             return redirect(url_for('showRestaurants'))
     else:
         return render_template('editRestaurant.html', restaurant=editedRestaurant)
-
-
 # Delete a restaurant
+
+
 @app.route('/restaurant/<int:restaurant_id>/delete/', methods=['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
     if 'username' not in login_session:
@@ -272,9 +271,9 @@ def deleteRestaurant(restaurant_id):
         return redirect(url_for('showRestaurants', restaurant_id=restaurant_id))
     else:
         return render_template('deleteRestaurant.html', restaurant=restaurantToDelete)
-
-
 # Show a restaurant menu
+
+
 @app.route('/restaurant/<int:restaurant_id>/')
 @app.route('/restaurant/<int:restaurant_id>/menu/')
 def showMenu(restaurant_id):
@@ -301,6 +300,8 @@ def newMenuItem(restaurant_id):
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
 
 # Edit a menu item
+
+
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
     if 'username' not in login_session:
