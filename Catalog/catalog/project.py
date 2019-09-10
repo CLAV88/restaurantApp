@@ -55,7 +55,8 @@ def gconnect():
     # print(code)
     try:
         # Upgrade the authorization code into a credentials object
-	oauth_flow = flow_from_clientsecrets('/var/www/Catalog/catalog/client_secrets.json', scope='')
+	    oauth_flow = flow_from_clientsecrets(
+	    '/var/www/Catalog/catalog/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -96,8 +97,8 @@ def gconnect():
 
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
-    ## print("stored_access_token: " + stored_access_token)
-    ## print("g_plus_id: " + stored_gplus_id)
+    # print("stored_access_token: " + stored_access_token)
+    # print("g_plus_id: " + stored_gplus_id)
     if stored_access_token is not None and gplus_id == stored_gplus_id:
         print('here')
         response = make_response(json.dumps('Current user is already connected.'),
@@ -115,7 +116,7 @@ def gconnect():
     answer = requests.get(userinfo_url, params=params)
 
     data = answer.json()
-    ## print("user_data: " + data)
+    # print("user_data: " + data)
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
@@ -194,8 +195,13 @@ def gdisconnect():
             json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
+# Restaurant JSON
+@app.route('/restaurant/JSON')
+def restaurantsJSON():
+    restaurants = session.query(Restaurant).all()
+    return jsonify(restaurants=[r.serialize for r in restaurants])
 
-
+# Restaurant Menu JSON
 @app.route('/restaurant/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
@@ -203,18 +209,11 @@ def restaurantMenuJSON(restaurant_id):
         restaurant_id=restaurant_id).all()
     return jsonify(MenuItems=[i.serialize for i in items])
 
-
+# Restaurant Menu Item JSON
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/JSON')
 def menuItemJSON(restaurant_id, menu_id):
     Menu_Item = session.query(MenuItem).filter_by(id=menu_id).one()
     return jsonify(Menu_Item=Menu_Item.serialize)
-
-
-@app.route('/restaurant/JSON')
-def restaurantsJSON():
-    restaurants = session.query(Restaurant).all()
-    return jsonify(restaurants=[r.serialize for r in restaurants])
-
 
 # Show all restaurants
 @app.route('/')
