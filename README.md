@@ -12,7 +12,11 @@ The application has multiple easy to use API endpoints to expose the data in the
 
 ## Logging into the Restaurant Menu App Server Ubuntu 18.04 on AWS LightSail.
 
+<<<<<<< HEAD
 Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
+=======
+Type **ssh USER@PORT -i /c/Users/calvi/.ssh/LightSailKey -p=PORTNUM**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
+>>>>>>> 78b23f0c1e1877d9703438e8bceb6f581cb0a1d9
 
 Now that you have Vagrant up and running type **vagrant ssh** to log into your VM.  change to the /vagrant directory by typing **cd /vagrant**. This will take you to the shared folder between your virtual machine and host machine.
 
@@ -750,4 +754,8 @@ References:
 * xxd/bionic-updates,bionic-security,now 2:8.0.1453-1ubuntu1.1 amd64 [installed]
 * xz-utils/bionic,now 5.2.2-1.3 amd64 [installed]
 * zerofree/bionic,now 1.0.4-1 amd64 [installed]
+<<<<<<< HEAD
 * zlib1g/bionic,now 1:1.2.11.dfsg-0ubuntu2 amd64 [installed]
+=======
+* zlib1g/bionic,now 1:1.2.11.dfsg-0ubuntu2 amd64 [installed]
+>>>>>>> 78b23f0c1e1877d9703438e8bceb6f581cb0a1d9
