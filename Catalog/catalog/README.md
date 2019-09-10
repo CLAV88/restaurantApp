@@ -11,7 +11,6 @@ On Windows, Git will provide you with a Unix-style terminal and shell (Git Bash)
 
 You will need Git to install the configuration for the VM. If you'd like to learn more about Git, [take a look at our course about Git and Github](http://www.udacity.com/course/ud775).
 
-<<<<<<< HEAD
 ## Logging into the Restaurant Menu App Server Ubuntu 18.04 on AWS LightSail.
 
 Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
@@ -19,7 +18,6 @@ Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along wit
 ### VirtualBox
 
 VirtualBox is the software that actually runs the VM. [You can download it from virtualbox.org, here.](https://www.virtualbox.org/wiki/Downloads)  Install the *platform package* for your operating system.  You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it.
->>>>>>> 78b23f0c1e1877d9703438e8bceb6f581cb0a1d9
 
 **Ubuntu 14.04 Note:** If you are running Ubuntu 14.04, install VirtualBox using the Ubuntu Software Center, not the virtualbox.org web site. Due to a [reported bug](http://ubuntuforums.org/showthread.php?t=2227131), installing VirtualBox from the site may uninstall other software you need.
 
