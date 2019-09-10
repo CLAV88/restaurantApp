@@ -18,6 +18,7 @@ from flask import make_response
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 CLIENT_ID = json.loads(
     open('/var/www/Catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
