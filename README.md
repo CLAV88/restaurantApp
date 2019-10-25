@@ -10,16 +10,6 @@ This is a full CRUD capable application, to demonstrate understanding of how usi
 
 The application has multiple easy to use API endpoints to expose the data in the PSQL database underlying the site, and allows any user with a Google account to create custom lists of restaurants (along with menus, prices, food characteristics) all on their own.
 
-## Logging into the Restaurant Menu App Server Ubuntu 18.04 on AWS LightSail.
-
-<<<<<<< HEAD
-Type **ssh grader@99.79.159.214 -i /c/Users/calvi/.ssh/LightSailKey**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
-=======
-Type **ssh USER@PORT -i /c/Users/calvi/.ssh/LightSailKey -p=PORTNUM**, along with the secret passphrase. This will log your terminal into the virtual machine on AWS so long as you have the correct pub key and password, When you want to log out, type **exit** at the shell prompt. Authentication is enforced on SSH key public & private.
->>>>>>> 78b23f0c1e1877d9703438e8bceb6f581cb0a1d9
-
-Now that you have Vagrant up and running type **vagrant ssh** to log into your VM.  change to the /vagrant directory by typing **cd /vagrant**. This will take you to the shared folder between your virtual machine and host machine.
-
 Type **ls** to ensure that you are inside the directory that contains project.py, database_setup.py, and two directories named 'templates' and 'static'
 
 Now type **python database_setup.py** to initialize the database.
